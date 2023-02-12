@@ -40,7 +40,7 @@ class TmdbSpider(scrapy.Spider):
         all_links = response.css("ol.people.credits div.info a::attr(href)").getall()
                     
         #generating requests for each actor and calling the parse_actor_page function
-        yield from (scrapy.Request("https://www.themoviedb.org" + url, callback=self.parse_actor_page) for url in actors)
+        yield from (scrapy.Request("https://www.themoviedb.org" + url, callback=self.parse_actor_page) for url in all_links)
 
     def parse_actor_page(self, response):
         '''
